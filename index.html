@@ -196,26 +196,9 @@
     <p>© 2026 Revolución Social UTEG</p>
 </footer>
 
-<script>
-    function toggleCalm() { 
-        document.body.classList.toggle('calm-mode');
-        document.getElementById('btnC').innerText = document.body.classList.contains('calm-mode') ? "MODO OSCURO" : "MODO CALMA";
-    }
-    function toggleP() { const b = document.getElementById('pBar'); b.style.display = (b.style.display === "flex") ? "none" : "flex"; }
-    function openM() { document.getElementById('mO').style.display = 'flex'; }
-    function closeM() { document.getElementById('mO').style.display = 'none'; }
-    function send() {
-        const n = document.getElementById('n').value;
-        const c = document.getElementById('c').value;
-        const e = document.getElementById('email').value;
-        const ca = document.getElementById('carrera').value;
-        if(!n || !c || !e || !ca) { alert("Por favor llena todos los campos"); return; }
-        const msg = `¡Hola! Me uno a Revolución Social.%0A*Nombre:* ${n}%0A*Código:* ${c}%0A*Correo:* ${e}%0A*Carrera:* ${ca}`;
-        window.open(`https://wa.me/521XXXXXXXXXX?text=${msg}`, '_blank');
-        closeM();
-    }
-</script>
+
 </body>
 </html>
+
 
 
