@@ -1,4 +1,5 @@
-   <!DOCTYPE html>
+ 
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -12,22 +13,19 @@
         :root {
             --bg: #0b0e11; --surface: #1a1f24; --primary: #3b82f6; --accent: #fbbf24;
             --text: #ffffff; --text-dim: #a0a6af; --border: rgba(255,255,255,0.1);
-            --transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
             --font-main: 'Montserrat', sans-serif; --calm-icon: "✨";
         }
 
+        /* ANIMACIÓN Y ESTADOS MODO CALMA */
         body.calm-mode { 
             --bg: #1e293b; --surface: #334155; --primary: #60a5fa; 
             --text: #cbd5e1; --border: rgba(255,255,255,0.05); --calm-icon: "🍃";
         }
 
         html { scroll-behavior: smooth; }
-        body { 
-            font-family: var(--font-main); margin: 0; background: var(--bg); 
-            color: var(--text); transition: var(--transition); overflow-x: hidden; 
-        }
-
-        #particles-js { position: fixed; width: 100%; height: 100%; z-index: -1; top: 0; left: 0; background-color: var(--bg); }
+        body { font-family: var(--font-main); margin: 0; background: var(--bg); color: var(--text); transition: var(--transition); overflow-x: hidden; }
+        #particles-js { position: fixed; width: 100%; height: 100%; z-index: -1; top: 0; left: 0; background-color: var(--bg); transition: var(--transition); }
 
         /* HEADER */
         header { 
@@ -36,149 +34,92 @@
             background: rgba(11, 14, 17, 0.7); border-bottom: 1px solid var(--border); 
         }
 
-        /* BOTÓN CALMA */
-        .calm-container { display: flex; align-items: center; gap: 10px; cursor: pointer; padding: 5px 12px; border-radius: 50px; transition: var(--transition); border: 1px solid transparent; }
-        .calm-container:hover { background: rgba(255,255,255,0.05); border-color: var(--border); }
-        .btn-minimal { background: none; border: none; font-size: 1.5rem; cursor: pointer; display: flex; align-items: center; transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .calm-container { display: flex; align-items: center; gap: 10px; cursor: pointer; padding: 5px 12px; border-radius: 50px; transition: 0.3s; }
+        .calm-container:hover { background: rgba(255,255,255,0.1); }
+        
+        .btn-minimal { 
+            background: none; border: none; font-size: 1.5rem; cursor: pointer; display: flex; align-items: center; 
+            transition: transform 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55); 
+        }
         .btn-minimal::after { content: var(--calm-icon); }
-        body.calm-mode .btn-minimal { transform: rotate(180deg) scale(1.1); }
-        .calm-text { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--text-dim); transition: var(--transition); }
-        body.calm-mode .calm-text { color: var(--primary); }
+        body.calm-mode .btn-minimal { transform: rotate(180deg) scale(1.2); }
+        
+        .calm-text { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--text-dim); }
 
-        /* MENU CODIGO */
-        .btn-menu-code {
-            background: none; border: none; cursor: pointer; font-family: monospace; 
-            font-size: 1.6rem; color: var(--primary); font-weight: bold; transition: 0.3s; 
-            padding-left: 15px; border-left: 1px solid var(--border);
-        }
-        .btn-menu-code:hover { color: var(--text); letter-spacing: 3px; }
-
-        .dropdown-menu { 
-            display:none; position:absolute; right:0; top:60px; background:var(--surface); 
-            min-width:240px; border-radius:15px; border:1px solid var(--border); overflow:hidden; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
+        .btn-menu-code { background: none; border: none; cursor: pointer; font-family: monospace; font-size: 1.6rem; color: var(--primary); font-weight: bold; padding-left: 15px; border-left: 1px solid var(--border); }
+        .dropdown-menu { display:none; position:absolute; right:0; top:60px; background:var(--surface); min-width:240px; border-radius:15px; border:1px solid var(--border); overflow:hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
         .dropdown-menu a { color: var(--text); padding: 15px 25px; display: block; text-decoration: none; font-size: 14px; transition: 0.3s; }
-        .dropdown-menu a:hover { background: rgba(255,255,255,0.05); color: var(--primary); padding-left: 30px; }
+        .dropdown-menu a:hover { background: rgba(255,255,255,0.05); color: var(--primary); }
 
         /* HERO */
         .hero { height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
-        .hero p { font-size: 1.1rem; color: var(--text-dim); margin-bottom: 20px; letter-spacing: 3px; text-transform: uppercase; }
-        .hero h1 { font-size: clamp(3rem, 10vw, 7rem); font-weight: 900; line-height: 0.9; margin: 0; letter-spacing: -3px; }
-        .italic-text { font-family: 'Playfair Display', serif; font-style: italic; font-weight: 400; color: var(--primary); text-transform: none; }
+        .hero h1 { font-size: clamp(3.5rem, 10vw, 7rem); font-weight: 900; line-height: 0.9; margin: 0; letter-spacing: -3px; }
+        .italic-text { font-family: 'Playfair Display', serif; font-style: italic; font-weight: 400; color: var(--primary); transition: var(--transition); }
 
-        /* MISIÓN Y VISIÓN */
+        /* EVENTOS */
+        .events-section { padding: 120px 8%; background: rgba(255,255,255,0.02); }
+        .events-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 50px; }
+        .event-card { background: var(--surface); border: 2px solid var(--accent); border-radius: 30px; padding: 40px; transition: var(--transition); position: relative; overflow: hidden; }
+        .event-card:hover { transform: translateY(-10px); box-shadow: 0 10px 30px rgba(251, 191, 36, 0.2); }
+        .event-date { color: var(--accent); font-weight: 900; font-size: 1.2rem; margin-bottom: 10px; display: block; }
+        .btn-tacos { display: inline-block; margin-top: 20px; padding: 15px 30px; border-radius: 50px; background: var(--accent); border: none; color: #000; font-weight: 900; text-decoration: none; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* MISIÓN Y VISIÓN (AMPLIADAS) */
         .mv-canvas { display: flex; width: 100%; height: 85vh; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); overflow: hidden; }
-        .mv-trigger { flex: 1; display: flex; align-items: center; justify-content: center; padding: 40px; transition: 1s cubic-bezier(0.2, 1, 0.2, 1); position: relative; }
+        .mv-trigger { flex: 1; display: flex; align-items: center; justify-content: center; padding: 60px; transition: 1s cubic-bezier(0.2, 1, 0.2, 1); cursor: crosshair; position: relative; }
         .mv-trigger:hover { flex: 5; background: rgba(59, 130, 246, 0.03); }
-        .mv-canvas:hover .mv-trigger:not(:hover) { flex: 0.3; opacity: 0.15; filter: blur(10px); }
-        .mv-data { text-align: center; pointer-events: none; }
-        .mv-details { max-height: 0; opacity: 0; transform: translateY(30px); transition: 0.8s; max-width: 550px; }
-        .mv-trigger:hover .mv-details { max-height: 400px; opacity: 1; transform: translateY(0); margin-top: 30px; }
-        .mv-details p { font-size: 1.2rem; line-height: 1.8; color: var(--text-dim); }
+        .mv-details { max-height: 0; opacity: 0; transform: translateY(30px); transition: 0.8s; text-align: center; max-width: 600px; }
+        .mv-trigger:hover .mv-details { max-height: 500px; opacity: 1; transform: translateY(0); margin-top: 30px; }
+        .mv-details p { font-size: 1.1rem; line-height: 1.8; color: var(--text-dim); text-align: justify; }
 
-        /* PROPUESTAS RESTAURADAS */
+        /* PROPUESTAS */
         .propuestas-section { padding: 120px 8%; }
         .stack-container { display: flex; flex-direction: column; gap: 20px; }
-        .stack-card {
-            position: relative; height: 140px; border-radius: 35px; overflow: hidden;
-            display: flex; align-items: center; padding: 0 50px; cursor: pointer;
-            border: 1px solid var(--border); transition: var(--transition);
-        }
-        .card-img-bg { position: absolute; inset: 0; z-index: -1; background-size: cover; background-position: center; filter: brightness(0.4); transition: var(--transition); }
-        .stack-card:hover { transform: scale(1.02); border-color: var(--primary); }
-        .stack-card:hover .card-img-bg { filter: brightness(0.6) scale(1.05); }
-        .stack-card h3 { font-size: 1.8rem; margin: 0; font-weight: 900; }
+        .stack-card { position: relative; height: 140px; border-radius: 35px; overflow: hidden; display: flex; align-items: center; padding: 0 50px; cursor: pointer; border: 1px solid var(--border); transition: var(--transition); }
+        .card-img-bg { position: absolute; inset: 0; z-index: -1; background-size: cover; background-position: center; filter: brightness(0.4); transition: 0.8s; }
+        .stack-card:hover .card-img-bg { transform: scale(1.05); filter: brightness(0.6); }
 
-        /* AGENDA */
-        .agenda-section { padding: 80px 8%; border-top: 1px solid var(--border); }
-        .agenda-grid { display: flex; overflow-x: auto; gap: 30px; padding-bottom: 30px; scrollbar-width: none; }
-        .agenda-card { 
-            min-width: 280px; padding: 30px; background: var(--surface); border-radius: 25px; 
-            border-left: 5px solid var(--primary); transition: 0.4s;
-        }
-        .agenda-card:hover { transform: translateY(-10px); background: rgba(59, 130, 246, 0.05); }
-        .agenda-date { font-weight: 900; color: var(--primary); font-size: 0.8rem; text-transform: uppercase; }
-
-        /* VALORES */
+        /* VALORES (RESTAURADOS) */
         .valores-section { padding: 120px 8%; }
         .valores-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 30px; }
-        .valor-card {
-            background: rgba(255,255,255,0.03); padding: 60px 40px; border-radius: 40px; border: 1px solid var(--border); text-align: center; transition: var(--transition); 
-            min-height: 320px; display: flex; flex-direction: column; align-items: center; justify-content: center;
-        }
-        .valor-card:hover { transform: translateY(-15px); border-color: var(--glow-color); box-shadow: 0 0 25px var(--glow-color); }
-        .valor-emoji { font-size: 4.5rem; margin-bottom: 20px; }
-        .valor-desc { max-height: 0; opacity: 0; overflow: hidden; transition: var(--transition); color: var(--text-dim); font-size: 0.95rem; }
-        .valor-card:hover .valor-desc { max-height: 100px; opacity: 1; margin-top: 20px; }
+        .valor-card { background: rgba(255,255,255,0.03); padding: 60px 40px; border-radius: 40px; border: 1px solid var(--border); text-align: center; transition: var(--transition); position: relative; }
+        .valor-card:hover { transform: translateY(-15px); border-color: var(--glow-color); box-shadow: 0 0 30px var(--glow-color); }
+        .valor-emoji { font-size: 4.5rem; margin-bottom: 20px; display: block; }
         .empatia { --glow-color: #ff4757; } .solidaridad { --glow-color: #2ed573; } .transparencia { --glow-color: #1e90ff; } .resiliencia { --glow-color: #ffa502; }
 
-        /* PRINCIPIOS */
-        .principios-section { padding: 100px 8%; border-top: 1px solid var(--border); }
-        .principios-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; margin-top: 50px; }
-        .principio-card { padding: 40px; border-radius: 30px; background: rgba(255,255,255,0.02); border: 1px solid var(--border); }
-        .principio-card h4 { color: var(--primary); margin-bottom: 20px; font-size: 1.4rem; font-weight: 900; }
+        /* BUZÓN */
+        .mailbox-section { padding: 100px 8%; text-align: center; }
+        .mailbox-container { max-width: 700px; margin: 0 auto; background: var(--surface); padding: 50px; border-radius: 40px; border: 1px solid var(--border); transition: var(--transition); }
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 30px; }
+        .full-w { grid-column: span 2; }
+        .mailbox-input { width: 100%; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 15px; padding: 18px; color: white; box-sizing: border-box; font-family: inherit; }
+        .btn-send { width: 100%; padding: 20px; border-radius: 15px; border: none; background: var(--primary); color: white; font-weight: 900; cursor: pointer; transition: 0.4s; text-transform: uppercase; letter-spacing: 2px; }
 
-        /* BUZÓN DE SUGERENCIAS */
-        .mailbox-section { padding: 100px 8%; text-align: center; background: rgba(255,255,255,0.01); border-top: 1px solid var(--border); }
-        .mailbox-container { max-width: 700px; margin: 0 auto; }
-        textarea { 
-            width: 100%; background: var(--surface); border: 1px solid var(--border); 
-            border-radius: 20px; padding: 20px; color: white; font-family: inherit; 
-            resize: none; margin-top: 30px; transition: 0.3s;
-        }
-        textarea:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 15px rgba(59,130,246,0.2); }
-        .btn-send { 
-            margin-top: 20px; padding: 15px 40px; border-radius: 50px; border: none; 
-            background: var(--primary); color: white; font-weight: 900; cursor: pointer; 
-            transition: 0.3s; text-transform: uppercase; letter-spacing: 2px;
-        }
-        .btn-send:hover { transform: scale(1.05); filter: brightness(1.2); }
+        /* FOOTER */
+        footer { padding: 60px 5%; text-align: center; border-top: 1px solid var(--border); background: rgba(0,0,0,0.2); }
+        .social-container { display: flex; justify-content: center; gap: 30px; margin-bottom: 30px; }
+        .social-icon { font-size: 2rem; color: var(--text-dim); text-decoration: none; transition: 0.4s; }
+        .social-icon:hover { transform: translateY(-10px); color: var(--primary); }
 
-        /* FOOTER Y REDES */
-        footer { padding: 80px 8% 40px; border-top: 1px solid var(--border); background: rgba(0,0,0,0.2); text-align: center; }
-        .social-links { display: flex; justify-content: center; gap: 30px; margin-bottom: 40px; }
-        .social-links a { 
-            font-size: 2.2rem; color: var(--text); position: relative;
-            width: 80px; height: 80px; display: flex; align-items: center; justify-content: center;
-            border-radius: 50%; border: 1px solid var(--border); transition: 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-        }
-        .social-links a::before { 
-            content: ''; position: absolute; inset: 0; border-radius: 50%; background: var(--primary); 
-            z-index: -1; transform: scale(0); transition: 0.4s; opacity: 0;
-        }
-        .social-links a:hover { transform: translateY(-15px) scale(1.1); color: #fff; border-color: var(--primary); }
-        .social-links a:hover::before { transform: scale(1); opacity: 0.2; }
-        
-        .footer-logo { font-weight: 900; font-size: 1.5rem; margin-bottom: 10px; }
-        .footer-copy { color: var(--text-dim); font-size: 0.75rem; letter-spacing: 1px; }
-
-        /* MODALES PLANILLA */
+        /* MODALES */
         .modal { display: none; position: fixed; inset: 0; background: rgba(0, 0, 0, 0.95); z-index: 5000; align-items: center; justify-content: center; backdrop-filter: blur(20px); padding: 20px; }
-        .modal-inner { background: var(--surface); width: 100%; max-width: 1100px; max-height: 85vh; border-radius: 40px; border: 1px solid var(--border); padding: 50px; overflow-y: auto; position: relative; }
-        .close-modal { position: absolute; top: 25px; right: 30px; background: none; border: none; color: var(--text-dim); font-size: 2.5rem; cursor: pointer; }
+        .modal-inner { background: var(--surface); width: 100%; max-width: 900px; border-radius: 40px; border: 1px solid var(--border); padding: 50px; position: relative; max-height: 85vh; overflow-y: auto; }
+        .p-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; text-align: center; margin-top: 30px; }
+        .t-float img { width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 3px solid var(--primary); margin-bottom: 15px; transition: 0.5s; }
+        .t-float:hover img { transform: scale(1.1); box-shadow: 0 0 20px var(--primary); }
 
-        .p-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 30px; }
-        .t-float { text-align: center; padding: 20px; transition: 0.4s; border-radius: 35px; border: 1px solid transparent; }
-        .t-float:hover { background: rgba(255,255,255,0.03); border-color: var(--border); }
-        .t-float img { width: 140px; height: 140px; border-radius: 50%; object-fit: cover; border: 3px solid var(--border); margin-bottom: 15px; transition: 0.5s; filter: grayscale(1); }
-        .t-float:hover img { filter: grayscale(0); transform: translateY(-10px); border-color: var(--primary); }
+        /* HUEVO DE PASCUA */
+        .easter-egg { font-size: 8px; color: rgba(255,255,255,0.05); cursor: help; transition: 0.3s; }
+        .easter-egg:hover { color: var(--accent); font-size: 14px; text-shadow: 0 0 10px var(--accent); }
 
-        /* OVERLAY PROPUESTAS */
-        .detail-overlay { position: fixed; inset: 0; z-index: 4000; display: none; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.6s ease; }
+        /* DETALLE PROPUESTA */
+        .detail-overlay { position: fixed; inset: 0; z-index: 4000; display: none; align-items: center; justify-content: center; opacity: 0; transition: 0.6s; }
         .detail-overlay.active { display: flex; opacity: 1; }
         .detail-bg-blur { position: absolute; inset: 0; background-size: cover; background-position: center; filter: blur(40px) brightness(0.2); z-index: -1; }
-        .detail-content { width: 85%; max-width: 1000px; padding: 60px; background: rgba(255,255,255,0.02); backdrop-filter: blur(15px); border-radius: 50px; border: 1px solid var(--border); transform: translateY(40px); transition: 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
-        .detail-overlay.active .detail-content { transform: translateY(0); }
-        .close-btn { position: absolute; top: -20px; right: 20px; background: var(--primary); color: white; padding: 12px 30px; border-radius: 50px; cursor: pointer; font-weight: 900; font-size: 0.7rem; letter-spacing: 2px; }
-
-        @media (max-width: 768px) { 
-            .mv-canvas { flex-direction: column; height: auto; } .mv-trigger { height: 450px; } 
-            .hero h1 { font-size: 3.5rem; } .p-grid { grid-template-columns: 1fr 1fr; }
-        }
+        .detail-content { width: 85%; max-width: 1000px; padding: 60px; background: rgba(255,255,255,0.02); backdrop-filter: blur(15px); border-radius: 50px; border: 1px solid var(--border); position: relative; }
     </style>
 </head>
-<body onmousemove="playSlightHover()">
+<body class="">
 
     <div id="particles-js"></div>
 
@@ -192,8 +133,7 @@
             <div style="position: relative;">
                 <button class="btn-menu-code" onclick="toggleMenu()">&lt;/&gt;</button>
                 <div id="myDropdown" class="dropdown-menu">
-                    <a href="javascript:void(0)" onclick="openModal('plantillaModal')">👥 Conoce la Planilla</a>
-                    <a href="javascript:void(0)" onclick="scrollToFooter()">📱 Síguenos</a>
+                    <a href="javascript:void(0)" onclick="openModal('plantillaModal')">👥 Planilla Completa</a>
                     <a href="javascript:void(0)" onclick="openModal('privacidadModal')">🔐 Aviso de Privacidad</a>
                 </div>
             </div>
@@ -202,107 +142,111 @@
 
     <main>
         <section class="hero">
-            <p>Más que votos, cuidamos vidas</p>
-            <h1>BIENESTAR <br> <span class="italic-text">emocional.</span></h1>
+            <p style="letter-spacing: 3px; opacity: 0.8;">UTEG 2026</p>
+            <h1>BIENESTAR <br> <span class="italic-text">Emocional.</span></h1>
+        </section>
+
+        <section id="eventos" class="events-section">
+            <h2 style="font-size: 3.5rem; margin: 0;">PRÓXIMOS <span class="italic-text">eventos.</span></h2>
+            <div class="events-grid">
+                <div class="event-card">
+                    <span class="event-date">VIERNES 06 FEB | 4:00 PM</span>
+                    <h3 style="font-size: 2.2rem; margin: 10px 0;">SPOT + TACOS 🌮</h3>
+                    <div style="font-size: 0.9rem; color: var(--text-dim); margin-bottom: 20px;"><i class="fas fa-map-marker-alt"></i> UTEG Olímpica</div>
+                    <p>Envía tu propuesta en el buzón de abajo, toma captura y canjea tu orden gratis en el evento.</p>
+                    <a href="#contacto" class="btn-tacos">¡Quiero mis tacos!</a>
+                </div>
+            </div>
         </section>
 
         <section class="mv-canvas">
-            <div class="mv-trigger" onmouseenter="playBeep()">
-                <div class="mv-data">
-                    <span style="font-size: 10px; font-weight: 900; letter-spacing: 5px; color: var(--primary);">NUESTRA</span>
-                    <h2 style="font-size: 4rem; margin: 10px 0;">Misión.</h2>
+            <div class="mv-trigger">
+                <div>
+                    <h2 style="font-size: 4rem; margin: 0;">Misión.</h2>
                     <div class="mv-details">
-                        <p>Representar con <b>integridad</b> a la comunidad de UTEG, transformando tus necesidades en soluciones reales.</p>
+                        <p>Nuestra misión es transformar la política estudiantil en un ecosistema de soporte integral. Nos comprometemos a ser el puente directo entre las necesidades académicas y el bienestar humano, priorizando la salud mental, la seguridad en los traslados y la dignificación del tiempo del estudiante.</p>
                     </div>
                 </div>
             </div>
-            <div class="mv-trigger" onmouseenter="playBeep()">
-                <div class="mv-data">
-                    <span style="font-size: 10px; font-weight: 900; letter-spacing: 5px; color: var(--primary);">NUESTRA</span>
-                    <h2 style="font-size: 4rem; margin: 10px 0;">Visión.</h2>
+            <div class="mv-trigger">
+                <div>
+                    <h2 style="font-size: 4rem; margin: 0;">Visión.</h2>
                     <div class="mv-details">
-                        <p>Consolidarnos como el referente de <b>evolución</b> universitaria, dejando un legado de vanguardia.</p>
+                        <p>Para el 2026, Revolución Social será recordada como la gestión que humanizó la excelencia académica en UTEG. Aspiramos a lograr que el bienestar emocional sea la base del éxito profesional, garantizando un entorno seguro y equitativo.</p>
                     </div>
                 </div>
             </div>
         </section>
 
         <section id="propuestas" class="propuestas-section">
-            <h2 style="font-size: 3.5rem; margin-bottom: 50px;">PROPUESTAS <span class="italic-text">reales.</span></h2>
+            <h2 style="font-size: 3.5rem; margin-bottom: 50px;">PROPUESTAS  <span class="italic-text">cambio.</span></h2>
             <div class="stack-container">
                 <div class="stack-card" onclick="openProp('p1', 'https://images.unsplash.com/photo-1506126613408-eca07ce68773')">
                     <div class="card-img-bg" style="background-image: url('https://images.unsplash.com/photo-1506126613408-eca07ce68773?q=80&w=1200')"></div>
-                    <h3>Ley del tiempo para la vida</h3>
+                    <h3>01. Ley del Tiempo para la Vida</h3>
                 </div>
                 <div class="stack-card" onclick="openProp('p2', 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae')">
                     <div class="card-img-bg" style="background-image: url('https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?q=80&w=1200')"></div>
-                    <h3>Canasta Básica Mental</h3>
+                    <h3>02. Canasta Básica Mental</h3>
                 </div>
                 <div class="stack-card" onclick="openProp('p3', 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e')">
                     <div class="card-img-bg" style="background-image: url('https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?q=80&w=1200')"></div>
-                    <h3>Psicólogo de Barrio</h3>
+                    <h3>03. Psicólogo de Barrio (Campus)</h3>
                 </div>
-                <div class="stack-card" onclick="openProp('p4', 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b')">
-                    <div class="card-img-bg" style="background-image: url('https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=1200')"></div>
-                    <h3>Educación Emocional</h3>
+                <div class="stack-card" onclick="openProp('p4', 'https://images.unsplash.com/photo-1517021897933-0e0319cfbc28')">
+                    <div class="card-img-bg" style="background-image: url('https://images.unsplash.com/photo-1517021897933-0e0319cfbc28?q=80&w=1200')"></div>
+                    <h3>04. Seguridad y Movilidad Estudiantil</h3>
                 </div>
             </div>
         </section>
 
-        <section class="agenda-section">
-            <h2 style="font-size: 2.5rem; margin-bottom: 30px;">PRÓXIMAS <span class="italic-text">Visitas.</span></h2>
-            <div class="agenda-grid">
-                <div class="agenda-card"><span class="agenda-date">10 Feb 2026</span><h4>Campus Rio Nilo</h4><p>Diálogo Estudiantil.</p></div>
-                <div class="agenda-card"><span class="agenda-date">12 Feb 2026</span><h4>Campus Olímpica</h4><p>Foro de Salud Mental.</p></div>
-                <div class="agenda-card"><span class="agenda-date">15 Feb 2026</span><h4>Campus Zapopan</h4><p>Cierre de Campaña.</p></div>
-            </div>
-        </section>
-
-        <section id="valores" class="valores-section">
-            <h2 style="font-size: 3rem; margin-bottom: 50px;">NUESTROS <span class="italic-text">Valores.</span></h2>
+        <section class="valores-section">
             <div class="valores-grid">
-                <div class="valor-card empatia"><div class="valor-emoji">🫂</div><h3>Empatía</h3><div class="valor-desc">Sentimos tus retos como propios.</div></div>
-                <div class="valor-card solidaridad"><div class="valor-emoji">✊</div><h3>Solidaridad</h3><div class="valor-desc">Nadie camina solo en UTEG.</div></div>
-                <div class="valor-card transparencia"><div class="valor-emoji">💎</div><h3>Transparencia</h3><div class="valor-desc">Cuentas claras y honestidad total.</div></div>
-                <div class="valor-card resiliencia"><div class="valor-emoji">🛡️</div><h3>Resiliencia</h3><div class="valor-desc">Superamos cualquier desafío juntos.</div></div>
+                <div class="valor-card empatia"><span class="valor-emoji">🫂</span><h3>Empatía</h3></div>
+                <div class="valor-card solidaridad"><span class="valor-emoji">✊</span><h3>Solidaridad</h3></div>
+                <div class="valor-card transparencia"><span class="valor-emoji">💎</span><h3>Transparencia</h3></div>
+                <div class="valor-card resiliencia"><span class="valor-emoji">🛡️</span><h3>Resiliencia</h3></div>
             </div>
         </section>
 
-        <section class="principios-section">
-            <h2 style="font-size: 3rem; margin-bottom: 40px;">NUESTROS <span class="italic-text">Principios.</span></h2>
-            <div class="principios-grid">
-                <div class="principio-card"><h4>Salud Integral</h4><p>Equilibrio físico y mental.</p></div>
-                <div class="principio-card"><h4>Humanismo</h4><p>Tu valor es prioridad.</p></div>
-                <div class="principio-card"><h4>Inclusión</h4><p>Espacio seguro para todos.</p></div>
-            </div>
-        </section>
-
-        <section class="mailbox-section">
+        <section id="contacto" class="mailbox-section">
             <div class="mailbox-container">
-                <h2 style="font-size: 2.5rem;">BUZÓN DE <span class="italic-text">Propuestas.</span></h2>
-                <textarea rows="5" placeholder="Escribe aquí tu propuesta..."></textarea>
-                <button class="btn-send" onclick="alert('Propuesta enviada. ¡Gracias!')">Enviar Idea</button>
+                <h2 style="font-size: 2.5rem; margin: 0;">TU VOZ <span class="italic-text">cuenta.</span></h2>
+                <form id="contact-form" action="https://formspree.io/f/mjgopoeq" method="POST">
+                    <div class="form-grid">
+                        <input type="text" name="nombre" class="mailbox-input" placeholder="Nombre completo" required>
+                        <input type="text" name="matricula" class="mailbox-input" placeholder="Matrícula" required>
+                        <input type="text" name="carrera" class="mailbox-input" placeholder="Carrera" required>
+                        <input type="text" name="grado" class="mailbox-input" placeholder="Grado/Cuatrimestre" required>
+                        <input type="email" name="email" id="email-field" class="mailbox-input full-w" placeholder="tu_correo@alumnos.uteg.edu.mx" pattern=".+@alumnos\.uteg\.edu\.mx$" required>
+                        <textarea name="message" rows="4" class="mailbox-input full-w" placeholder="Escribe tu propuesta aquí..." required></textarea>
+                    </div>
+                    <button type="submit" id="submit-btn" class="btn-send">Enviar y ganar tacos</button>
+                </form>
+                <div id="success" style="display:none; padding-top: 20px;">
+                    <h2 style="color:var(--accent)">¡LISTO! 🌮</h2>
+                    <p>Captura esta pantalla para tus tacos gratis.</p>
+                </div>
             </div>
         </section>
     </main>
 
-    <footer id="main-footer">
-        <div class="social-links">
-            <a href="https://www.facebook.com/share/185eAc8djU/" target="_blank"><i class="fab fa-facebook-f"></i></a>
-            <a href="https://www.instagram.com/revolucion_social.utg/" target="_blank"><i class="fab fa-instagram"></i></a>
+    <footer>
+        <div class="social-container">
+            <a href="https://www.facebook.com/share/185eAc8djU/" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.instagram.com/revolucion_social.utg/" class="social-icon"><i class="fab fa-instagram"></i></a>
         </div>
-        <div class="footer-logo">REVOLUCIÓN <span style="color:var(--primary)">SOCIAL</span></div>
-        <div class="footer-copy">© 2026 UTEG - COORDINACIÓN ESTUDIANTIL.</div>
+        <p>© 2026 Revolución Social UTEG</p>
     </footer>
 
     <div id="plantillaModal" class="modal" onclick="if(event.target==this) closeModal('plantillaModal')">
         <div class="modal-inner">
-            <button class="close-modal" onclick="closeModal('plantillaModal')">×</button>
-            <h2 style="text-align: center; margin-bottom: 40px;">NUESTRA <span class="italic-text">Planilla</span></h2>
+            <button onclick="closeModal('plantillaModal')" style="position: absolute; top: 20px; right: 20px; background: none; border: none; color: white; font-size: 2rem; cursor: pointer;">×</button>
+            <h2 style="text-align: center;">LA <span class="italic-text">Planilla</span></h2>
             <div class="p-grid">
                 <div class="t-float"><img src="yair.jpg"><h4>Yair Gonzalez</h4><p>Presidente</p></div>
                 <div class="t-float"><img src="cesar.jpg"><h4>Cesar Morales</h4><p>Vicepresidente</p></div>
-                <div class="t-float"><img src="kevin.jpg"><h4>Kevin Zermeño</h4><p>Secretario</p></div>
+                <div class="t-float"><img src="kevin.jpg"><h4>Kevin Zermeño</h4><p>Secretario Gral.</p></div>
                 <div class="t-float"><img src="jorge.jpg"><h4>Jorge Cortez</h4><p>Finanzas</p></div>
                 <div class="t-float"><img src="isai.jpg"><h4>Isai Martinez</h4><p>Marketing</p></div>
                 <div class="t-float"><img src="francisco.jpg"><h4>Francisco S.</h4><p>Legislador</p></div>
@@ -311,62 +255,82 @@
     </div>
 
     <div id="privacidadModal" class="modal" onclick="if(event.target==this) closeModal('privacidadModal')">
-        <div class="modal-inner" style="max-width: 600px;">
-            <button class="close-modal" onclick="closeModal('privacidadModal')">×</button>
-            <h3>Aviso de Privacidad</h3>
-            <p>Tus datos están seguros con nosotros.</p>
+        <div class="modal-inner" style="max-width: 500px; text-align: center;">
+            <button onclick="closeModal('privacidadModal')" style="position: absolute; top: 20px; right: 20px; background: none; border: none; color: white; font-size: 2rem; cursor: pointer;">×</button>
+            <h2>Privacidad</h2>
+            <p>Tus datos son utilizados exclusivamente para validar tu identidad como estudiante UTEG.</p>
+            <br>
+            <span class="easter-egg">🎟️ TICKET DORADO ENCONTRADO: ¡Dile "Taco-Revolución" al staff para una sorpresa doble! 🌮</span>
         </div>
     </div>
 
     <div id="prop-detail" class="detail-overlay">
         <div id="detail-img" class="detail-bg-blur"></div>
         <div class="detail-content">
-            <div class="close-btn" onclick="closeProp()">CERRAR ESC ×</div>
-            <h2 id="detail-title" style="font-size: 3rem; margin: 0;"></h2>
-            <div style="margin-top: 30px; border-top: 1px solid var(--border); padding-top: 20px;">
-                <p id="detail-desc" style="font-size: 1.2rem; color: var(--text-dim);"></p>
-                <p id="detail-impact" style="font-size: 1rem; color: var(--primary); font-weight: 700;"></p>
-            </div>
+            <div onclick="closeProp()" style="position: absolute; top: -20px; right: 20px; background: var(--primary); color: white; padding: 10px 25px; border-radius: 50px; cursor: pointer;">CERRAR ×</div>
+            <h2 id="detail-title" style="font-size: 3rem; margin:0;"></h2>
+            <p id="detail-desc" style="font-size: 1.2rem; color: var(--text-dim); margin-top: 25px; line-height: 1.6;"></p>
         </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <script>
+        // CONFIGURACIÓN DE PARTÍCULAS
         particlesJS("particles-js", { "particles": { "number": { "value": 40 }, "opacity": { "value": 0.15 }, "size": { "value": 1.5 }, "line_linked": { "enable": true, "distance": 150, "opacity": 0.05 }, "move": { "speed": 0.5 } } });
+        
+        // ANIMACIÓN MODO CALMA
+        function toggleCalm() { 
+            document.body.classList.toggle('calm-mode');
+        }
 
-        const audioBeep = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-modern-technology-select-3124.mp3');
-        audioBeep.volume = 0.05;
-        function playBeep() { audioBeep.play().catch(e=>{}); }
-
-        function toggleCalm() { document.body.classList.toggle('calm-mode'); }
+        // MENÚ Y MODALES
         function toggleMenu() { const d = document.getElementById("myDropdown"); d.style.display = d.style.display === "block" ? "none" : "block"; }
-        function openModal(id) { document.getElementById(id).style.display = 'flex'; document.body.style.overflow = 'hidden'; }
-        function closeModal(id) { document.getElementById(id).style.display = 'none'; document.body.style.overflow = 'auto'; }
-        function scrollToFooter() { document.getElementById('main-footer').scrollIntoView({ behavior: 'smooth' }); }
+        function openModal(id) { document.getElementById(id).style.display = 'flex'; }
+        function closeModal(id) { document.getElementById(id).style.display = 'none'; }
 
+        // DATOS DE PROPUESTAS
         const propData = {
-            p1: { t: "Ley del tiempo", d: "Priorizamos tu descanso y salud mental.", i: "Impacto: Bienestar integral." },
-            p2: { t: "Canasta Básica Mental", d: "Acceso real a terapias y apoyo.", i: "Impacto: Inclusión en salud." },
-            p3: { t: "Psicólogo de Barrio", d: "Atención cercana en cada campus.", i: "Impacto: Prevención inmediata." },
-            p4: { t: "Educación Emocional", d: "Talleres prácticos de gestión de estrés.", i: "Impacto: Resiliencia estudiantil." }
+            p1: { t: "Ley del Tiempo para la Vida", d: "Regulación de cargas académicas en fines de semana para garantizar descanso efectivo y tiempo de calidad personal fuera de las aulas." },
+            p2: { t: "Canasta Básica Mental", d: "Acceso a herramientas de meditación, talleres de manejo de estrés y materiales didácticos de salud emocional gratuitos para la comunidad." },
+            p3: { t: "Psicólogo de Barrio", d: "Atención psicológica presencial en cada campus, eliminando las esperas y acercando el apoyo profesional a donde más se necesita." },
+            p4: { t: "Seguridad y Movilidad", d: "Gestión de rutas seguras, mejor iluminación en perímetros y botones de pánico digitales para traslados sin riesgos." }
         };
 
         function openProp(id, img) {
             document.getElementById('detail-title').innerText = propData[id].t;
             document.getElementById('detail-desc').innerText = propData[id].d;
-            document.getElementById('detail-impact').innerText = propData[id].i;
             document.getElementById('detail-img').style.backgroundImage = `url(${img})`;
             const overlay = document.getElementById('prop-detail');
             overlay.style.display = 'flex'; setTimeout(() => overlay.classList.add('active'), 10);
-            document.body.style.overflow = 'hidden';
         }
 
         function closeProp() {
             const overlay = document.getElementById('prop-detail');
             overlay.classList.remove('active'); setTimeout(() => overlay.style.display = 'none', 600);
-            document.body.style.overflow = 'auto';
         }
+
+        // LÓGICA DEL FORMULARIO
+        const form = document.getElementById('contact-form');
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('email-field').value;
+            if (!email.endsWith('@alumnos.uteg.edu.mx')) { alert("⚠️ Se requiere correo institucional (@alumnos.uteg.edu.mx)"); return; }
+            
+            const btn = document.getElementById('submit-btn');
+            btn.disabled = true; btn.innerText = "Validando...";
+            
+            try {
+                const response = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' } });
+                if (response.ok) {
+                    confetti({ particleCount: 200, spread: 90, origin: { y: 0.6 }, colors: ['#fbbf24', '#3b82f6'] });
+                    form.style.display = 'none';
+                    document.getElementById('success').style.display = 'block';
+                }
+            } catch (err) { alert("Error de conexión."); btn.disabled = false; btn.innerText = "Enviar"; }
+        });
     </script>
 </body>
-</html>
+</html> 
 
+  
